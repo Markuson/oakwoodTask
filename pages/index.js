@@ -1,65 +1,94 @@
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+
+import { ToastContainer, toast } from 'react-toastify';
+import ButtonControls from '../components/ButtonControls'
+import RepoInfo from '../components/RepoInfo'
+
+import list from '../assets/repoList'
+import logic from '../logic'
+
+
+import useStyles from '../styles/styles'
 
 export default function Home() {
+
+  const [index, setIndex] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [repoInfo, setRepoInfo] = useState({description:'', full_name:'', stargazers_count:''})
+
+  useEffect(() => {
+
+    handleRepoInfo()
+
+  }, [index])
+
+  const handleDecrement = () => {
+    if (index > 0) {
+      const _index = index - 1;
+      setIndex(_index);
+    }
+  }
+
+  const handleIncrement = () => {
+    if (index < list.length - 1) {
+      const _index = index + 1;
+      setIndex(_index);
+    }
+  }
+
+  const handleRepoInfo = async () => {
+    setLoading(true)
+    try {
+      const response = await logic.getRepoInfo(index)
+      setRepoInfo(response)
+    }
+    catch (error) {
+      setRepoInfo({description:'', full_name:'', stargazers_count:''})
+      handleToastError(error.message)
+    }
+    setLoading(false)
+  }
+
+  const handleToastError = (message) =>{
+    toast.error(message, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+  const classes = useStyles();
+
   return (
-    <div className={styles.container}>
+    <div className={classes.Container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Oakwood coding exercise</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+      <main className={classes.Main}>
+        <ButtonControls index={index} onDecrement={handleDecrement} onIncrement={handleIncrement} />
+        <RepoInfo repoInfo={repoInfo} loading={loading} />
       </main>
 
-      <footer className={styles.footer}>
+      <footer className={classes.Footer}>
+        <p>
+          Done by:&nbsp;
+        </p>
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          href="https://github.com/Markuson"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          Marc Usón
         </a>
       </footer>
+      <ToastContainer />
     </div>
   )
 }

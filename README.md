@@ -1,30 +1,133 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Oakwood Front-end Coding Exercise
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
+There's my coding ecercise.
+
+
+You could find the final result deployed on the [here](http://oakwoodtask.herokuapp.com).
+
+
+----
+
+
+
+## Guidelines
+
+- For this exercise we want you to use React. Feel free to use modern browser features and APIs
+
+- We will be judging the functionality as well as your coding style, the readability of your code and your creativity in solving the exercise
+
+- We prefer JSS for styling
+
+- Send us your source code/link to your CodePen/Codesandbox etc...
+
+
+
+## Exercise
+
+
+
+### Step 1
+
+Style these two buttons and their hover states:
+
+
+
+![buttons](https://user-images.githubusercontent.com/4313088/35987696-babbff00-0cfc-11e8-8986-8a47eb675f9f.png)
+
+
+
+For the plus and minus icons, feel free to style `+` and `-` characters, use inline svgs or any other solution you can come up with.
+
+
+
+The colors used are: `black`, `white`, `hotpink` and `rebeccapurple`.
+
+
+
+---
+
+
+
+### Step 2
+
+Time to put the buttons into action! First create the following layout using the two buttons from Step 1:
+
+
+
+![counter](https://user-images.githubusercontent.com/4313088/35988085-d26f12a8-0cfd-11e8-8ea8-ffeb13ec25f7.png)
+
+
+
+Then bring the counter to live with JavaScript: When pressing the `- DECREMENT` button, decrement the counter, when pressing `+ INCREMENT`, increment the counter.
+
+
+
+---
+
+
+
+### Step 3
+
+At Oakwood we ❤️ GitHub and we ❤️ open source. We've therefore put together a list of some of our favourite GitHub repositories. *(If you don't know all of them, go and check them out!)*
+
+
+
+```js
+
+[
+
+  'eslint/eslint',
+
+  'oakwood/front-end-questions',
+
+  'babel/babel',
+
+  'webpack/webpack',
+
+  'storybooks/storybook',
+
+  'facebook/react',
+
+  'reactjs/redux',
+
+  'expressjs/express'
+
+]
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-## Learn More
+We would like to display some data about the repositories. Use the counter as an index for the above array (`eslint/eslint` if the counter is 0, `oakwood/front-end-questions` if it's 1, ...) and fetch information about the GitHub repository from GitHub's API: `https://api.github.com/repos/{repositoryName}`.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Display the following data underneath the counter and style it however you see fit:
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- full name (`full_name`)
+
+- description (`description`)
+
+- amount of stars (`stargazers_count`)
+
+
+
+Handle and display any errors the API might throw, also think about any other potential problems and how you could prevent them.
+
+
+
+---
+
+
+
+### Extra
+
+Add a loading indication to the application: While new data is being fetched from the API, a loader should be displayed on the page.
+
+
+
+It's enough to display a text such as "loading repository", but feel free to get creative!

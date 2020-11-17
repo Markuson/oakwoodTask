@@ -5,11 +5,24 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "mocha ./logic/*.test.js --runInBand --timeout 40000",
+    "test:debug": "mocha debug ./src/**/*.test.js --runInBand",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "axios": "^0.21.0",
     "next": "10.0.1",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-jss": "^10.4.0",
+    "react-spinners": "^0.9.0",
+    "react-toastify": "^6.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
   }
 }
